@@ -23,33 +23,37 @@ let options = {
 io.on("connection", (socket) => {
     console.log("New client connected");
     
+    let pyshell;
 
-    let pyshell = new PythonShell('expertSystem.py', options);
+    socket.on("PyRun", () => {
+        pyshell = new PythonShell('expertSystem.py', options);
+        console.log("Python program in progress...");
 
-    console.log("Python program in progress...");
-    pyshell.on('message', function (message) {
-        // received a message sent from the Python script (a simple "print" statement)
-        console.log(message);
-        socket.emit("FromAPI", message);
-    });
+        pyshell.on('message', function (message) {
+            // received a message sent from the Python script (a simple "print" statement)
+            console.log(message);
+            socket.emit("FromAPI", message);
+        });
 
-    socket.on("FromClient", (res) => {
-        console.log(res);
-        // sends a message to the Python script via stdin
-        if (!pyshell.terminated) {
-            pyshell.send(res);
+        socket.on("FromClient", (res) => {
+            console.log(res);
+            // sends a message to the Python script via stdin
+            if (!pyshell.terminated) {
+                pyshell.send(res);
+            }
+        });
+        
+        if (pyshell.terminated){
+            console.log("Python program is terminated.")
+            // end the input stream and allow the process to exit
+            pyshell.end(function (err, code, signal) {
+                if (err) throw err;
+                console.log('The exit code was: ' + code);
+                console.log('The exit signal was: ' + signal);
+                console.log('finished');
+            });
         }
     });
-    if (pyshell.terminated){
-        console.log("Python program is terminated.")
-        // end the input stream and allow the process to exit
-        pyshell.end(function (err, code, signal) {
-            if (err) throw err;
-            console.log('The exit code was: ' + code);
-            console.log('The exit signal was: ' + signal);
-            console.log('finished');
-        });
-    }
 
     socket.on("disconnect", () => {
         console.log("Client disconnected");
