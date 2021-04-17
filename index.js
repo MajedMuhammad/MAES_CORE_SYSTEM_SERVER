@@ -31,7 +31,11 @@ io.on("connection", (socket) => {
     var data = '';
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
-        data += message;
+        if (message.indexOf('?') === -1) {
+            data += message;
+        } else {
+            data = message;
+        }
         console.log(message);
         socket.emit("FromAPI", data);
     });
