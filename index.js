@@ -29,7 +29,6 @@ io.on("connection", (socket) => {
     console.log("Python program in progress...");
 
     var sockBuf = '';
-    socket.setEncoding('utf8');
 
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
@@ -41,8 +40,9 @@ io.on("connection", (socket) => {
           socket.emit('FromAPI', sockBuf.slice(l, i));
           l = i + 1;
         }
-        if (l)
-        sockBuf = sockBuf.slice(l);
+        if (l) {
+            sockBuf = sockBuf.slice(l);
+        }
     });
 
     socket.on("FromClient", (res) => {
