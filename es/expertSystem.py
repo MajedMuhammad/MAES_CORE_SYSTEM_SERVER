@@ -27,12 +27,12 @@ class GoToDoctor(KnowledgeEngine):
 
     @Rule(patient(Headache="no",Dizzy="no",Sweating="yes"))
     def sweating(self):
-        print("Decreasing|drink Juice and don’t move at least 5 minutes")
+        print("Decreasing|Drink Juice and don’t move at least 5 minutes")
 
 def declare():
     headache= input("Do you have a headache? \n").lower()
     if headache=="yes":
-        fatigue=input("Do you feel Fatigue? \n").lower()
+        fatigue=input("Do you feel fatigue? \n").lower()
         if fatigue=="yes":
             increased_thirst=input("Do you have increased thirst? \n").lower()
             if increased_thirst=="yes":
@@ -43,15 +43,15 @@ def declare():
                 feeling_dryness=input("Do you feeling dryness in the tongue and throat? \n").lower()
                 return patient(Headache="yes",Fatigue="yes",Increased_thirst="no",Feeling_dryness="yes")
         else:
-            tachycardia=input("Do you fell a Tachycardia? \n").lower()
+            tachycardia=input("Do you fell a tachycardia? \n").lower()
             if tachycardia=="yes":
-                blurred_vision=input("Do you have Blurred vision? \n").lower()
+                blurred_vision=input("Do you have blurred vision? \n").lower()
                 return patient(Headache="yes",Fatigue="no",Tachycardia="no",Shortness_of_breath="yes")
             else:
-                shortness_of_breath=input("Do you have Shortness of breath? \n").lower()
+                shortness_of_breath=input("Do you have shortness of breath? \n").lower()
                 return patient(Headache="yes",Fatigue="no",Tachycardia="no",Shortness_of_breath="yes")
     else:
-        dizzy=input("Do you feel Dizzy? \n").lower()
+        dizzy=input("Do you feel dizzy? \n").lower()
         if dizzy=="yes":
             stressed_or_anxious=input("Do you feel stressed or anxious? \n").lower()
             return patient(Headache="no",Dizzy="yes",Stressed_or_anxious="yes")
