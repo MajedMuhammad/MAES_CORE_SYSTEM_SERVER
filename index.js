@@ -28,21 +28,10 @@ io.on("connection", (socket) => {
     pyshell = new PythonShell('expertSystem.py', options);
     console.log("Python program in progress...");
 
-    var sockBuf = '';
-
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
         console.log(message);
-        sockBuf += message;
-        var i;
-        var l = 0;
-        while ((i = sockBuf.indexOf('\n', l)) !== -1) {
-          socket.emit('FromAPI', sockBuf.slice(l, i));
-          l = i + 1;
-        }
-        if (l) {
-            sockBuf = sockBuf.slice(l);
-        }
+        socket.emit("FromAPI", message);
     });
 
     socket.on("FromClient", (res) => {
