@@ -32,7 +32,8 @@ io.on("connection", (socket) => {
     pyshell.on('message', function (message) {
         // received a message sent from the Python script (a simple "print" statement)
         if (message.indexOf('?') === -1) {
-            data += message.slice(message.indexOf('?'));
+            data += message;
+            data = data.slice(data.indexOf('?'))
         } else {
             data = message;
         }
