@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
         // received a message sent from the Python script (a simple "print" statement)
         if (message.indexOf('?') === -1) {
             data += message;
-            data = data.slice(data.indexOf('?'))
+            data = data.slice((data.indexOf('?') + 2));
         } else {
             data = message;
         }
