@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
         // received a message sent from the Python script (a simple "print" statement)
         data += message;
         console.log(message);
-        socket.emit("FromAPI", message);
+        socket.emit("FromAPI", data);
     });
 
     socket.on("FromClient", (res) => {
