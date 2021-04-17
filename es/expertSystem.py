@@ -7,27 +7,27 @@ class patient(Fact):
 class GoToDoctor(KnowledgeEngine):
     @Rule(patient(Headache="yes",Fatigue="yes",Increased_thirst="yes",Urinate_a_lot="yes"))
     def urinate_a_lot(self):
-        print("Beginning increasing \n Drink water and walk a little.")
+        print("Beginning increasing|Drink water and walk a little.")
 
     @Rule(patient(Headache="yes",Fatigue="yes",Increased_thirst="no",Feeling_dryness="yes"))
     def feeling_dryness(self):
-        print("increasing \nTake and increase your insulin dose.")
+        print("increasing|Take and increase your insulin dose.")
 
     @Rule(patient(Headache="yes",Fatigue="no",Tachycardia="yes",Blurred_vision="yes"))
     def Blurred_vision(self):
-        print("Steep decreasing \nThe child should be given a glucagon needle and wait 10-15 minutes for the sugar to return to its normal level.")
+        print("Steep decreasing|The child should be given a glucagon needle and wait 10-15 minutes for the sugar to return to its normal level.")
 
     @Rule(patient(Headache="yes",Fatigue="no",Tachycardia="no",Shortness_of_breath="yes"))
     def Shortness_of_breath(self):
-        print("Steep increasing \nYou should go to the doctor")
+        print("Steep increasing|You should go to the doctor")
 
     @Rule(patient(Headache="no",Dizzy="yes",Stressed_or_anxious="yes"))
     def stressed_or_anxious(self):
-        print("beginning decreasing \nEat and  take a rest.")
+        print("beginning decreasing|Eat and  take a rest.")
 
     @Rule(patient(Headache="no",Dizzy="no",Sweating="yes"))
     def sweating(self):
-        print("Decreasing \ndrink Juice and don’t move at least 5 minutes.")
+        print("Decreasing|drink Juice and don’t move at least 5 minutes.")
 
 def declare():
     headache= input("Do you have a headache? \n").lower()
