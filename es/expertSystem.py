@@ -37,8 +37,8 @@ def declare():
             increased_thirst=input("Do you have increased thirst? \n").lower()
             if increased_thirst=="yes":
                 urinate_a_lot=input("Do you urinate a lot? \n").lower()
-                if urinate_a_lot=="yes": 
-                 return patient(Headache="yes",Fatigue="yes",Increased_thirst="yes",Urinate_a_lot="yes")
+                return patient(Headache="yes",Fatigue="yes", Increased_thirst="yes", Urinate_a_lot="yes")
+
             else:
                 feeling_dryness=input("Do you feeling dryness in the tongue and throat? \n").lower()
                 return patient(Headache="yes",Fatigue="yes",Increased_thirst="no",Feeling_dryness="yes")
